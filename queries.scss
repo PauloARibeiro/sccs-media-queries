@@ -1,0 +1,23 @@
+$breakpoints: (
+  mobile-max: '(max-width: 500px)',
+  mobile-min-max: '(min-width: 200px) and (max-width: 500px)',
+  tablet: '(max-width: 600px)'
+);
+
+@mixin breakpoint($breakpoint) {
+  $query: map-get($breakpoints, $breakpoint);
+
+  @if not $query {
+    @error "No breakpoint found with the value of `#{$breakpoint}`";
+  }
+
+  @media #{$query} {
+    @content;
+  }
+}
+
+body {
+  @include breakpoint(mobile-max) {
+    background: red;
+  }
+}
